@@ -10,9 +10,13 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
+        font-family: 'Raleway', sans-serif;
+
+        padding: 25px 25px 16px;
+
         background-color: #8C11BE;
     }
-`
+`;
 
 export default GlobalStyles;
 
