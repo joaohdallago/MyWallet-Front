@@ -7,11 +7,14 @@ const GlobalStyles = createGlobalStyle`
         padding: 0;
         border: 0;
         margin: 0;
+
+        text-decoration: none;
+
+        font-family: Raleway, sans-serif;
     }
 
-    body {
-        font-family: 'Raleway', sans-serif;
-
+    #root {
+        height: 100vh;
         padding: 25px 25px 16px;
 
         background-color: #8C11BE;
@@ -19,6 +22,3 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 export default GlobalStyles;
-
-// font-family: 'Raleway', sans-serif;
-// font-family: 'Saira Stencil One', cursive;
