@@ -1,9 +1,15 @@
 import AuthContainer from '../../theme/authContainer';
 
+import Logo from '../logo';
+import Form from './form';
+import LinkToLogin from './link-to-login';
+
 export default function SignUp() {
 	return (
 		<AuthContainer>
-			<h1>sign up</h1>
+			<Logo />
+			<Form />
+			<LinkToLogin />
 		</AuthContainer>
 	);
 }
