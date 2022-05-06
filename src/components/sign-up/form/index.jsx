@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import Inputs from './inputs';
+
 //TODO: 
-//quebrar form em inputs e buttom
+//deixar tudo redondinho
 export default function Form() {
+	const navigate = useNavigate();
+
 	const [newUser, setNewUser] = useState({
 		name: '',
 		email:'',
@@ -16,53 +21,26 @@ export default function Form() {
 	const signUp = async (event) => {
 		event.preventDefault();
 
-		if (password !== confirmPassword) return alert('as senhas não bateram');
+		if (password !== confirmPassword) return alert('As senhas precisam ser iguais!');
 
 		const url = 'http://localhost:5000/users';
 		try {
 			console.log(newUser);
-			const promise = await axios.post(url, {
+			await axios.post(url, {
 				name,
 				email,
 				password
 			});
 
-			console.log(promise);
+			return navigate('/');
 		} catch (error) {
-			console.log(error);
+			return alert('Ops! Houve algum erro...');
 		}
 	};
 
 	return (
 		<form onSubmit={signUp}>
-			<input
-				type="text"
-				placeholder="Nome"
-				onChange={e => setNewUser({...newUser, name: e.target.value})}
-				value={name}
-				required
-			/>
-			<input
-				type="email"
-				placeholder="E-mail"
-				onChange={e => setNewUser({...newUser, email: e.target.value})}
-				value={email}
-				required
-			/>
-			<input
-				type="text"
-				placeholder="Senha"
-				onChange={e => setNewUser({...newUser, password: e.target.value})}
-				value={password}
-				required
-			/>
-			<input
-				type="text"
-				placeholder="Confirme a Senha"
-				onChange={e => setNewUser({...newUser, confirmPassword: e.target.value})}
-				value={confirmPassword}
-				required
-			/>
+			<Inputs {...{newUser, setNewUser}}/>
 			<button>Entrar</button>
 		</form>
 	);
