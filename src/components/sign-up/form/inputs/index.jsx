@@ -1,33 +1,44 @@
-export default function Inputs({ newUser, setNewUser }) {
-	const { name, email, password, confirmPassword } = newUser;
+export default function Inputs({ signupData, setSignupData }) {
+	const handleSignupData = (e) => {
+		const newData = {...signupData};
+		const { name, value } = e.target;
 
+		newData[name] = value;  
+		setSignupData(newData);
+	};
+
+	const { name, email, password, confirmPassword } = signupData;
 	return (
 		<>
 			<input
 				type="text"
 				placeholder="Nome"
-				onChange={e => setNewUser({...newUser, name: e.target.value})}
+				name="name"
+				onChange={handleSignupData}
 				value={name}
 				required
 			/>
 			<input
 				type="email"
 				placeholder="E-mail"
-				onChange={e => setNewUser({...newUser, email: e.target.value})}
+				name="email"
+				onChange={handleSignupData}
 				value={email}
 				required
 			/>
 			<input
-				type="text"
+				type="password"
 				placeholder="Senha"
-				onChange={e => setNewUser({...newUser, password: e.target.value})}
+				name="password"
+				onChange={handleSignupData}
 				value={password}
 				required
 			/>
 			<input
-				type="text"
+				type="password"
 				placeholder="Confirme a Senha"
-				onChange={e => setNewUser({...newUser, confirmPassword: e.target.value})}
+				name="confirmPassword"
+				onChange={handleSignupData}
 				value={confirmPassword}
 				required
 			/>

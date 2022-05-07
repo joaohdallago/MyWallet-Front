@@ -9,14 +9,14 @@ import Inputs from './inputs';
 export default function Form() {
 	const navigate = useNavigate();
 
-	const [newUser, setNewUser] = useState({
+	const [signupData, setSignupData] = useState({
 		name: '',
 		email:'',
 		password: '',
 		confirmPassword: ''
 	});
 
-	const { name, email, password, confirmPassword } = newUser;
+	const { name, email, password, confirmPassword } = signupData;
 
 	const signUp = async (event) => {
 		event.preventDefault();
@@ -25,7 +25,6 @@ export default function Form() {
 
 		const url = 'http://localhost:5000/users';
 		try {
-			console.log(newUser);
 			await axios.post(url, {
 				name,
 				email,
@@ -34,14 +33,14 @@ export default function Form() {
 
 			return navigate('/');
 		} catch (error) {
-			return alert('Ops! Houve algum erro...');
+			return alert(error.response.data);
 		}
 	};
 
 	return (
 		<form onSubmit={signUp}>
-			<Inputs {...{newUser, setNewUser}}/>
-			<button>Entrar</button>
+			<Inputs {...{signupData, setSignupData}}/>
+			<button type='submit'>Entrar</button>
 		</form>
 	);
 }
