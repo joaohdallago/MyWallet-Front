@@ -1,6 +1,6 @@
 import GlobalStyles from '../theme/globalStyles';
 import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Login from './login';
 import SignUp from './sign-up';
@@ -9,7 +9,7 @@ import Wallet from './wallet';
 import UserContext from '../contexts/userContext';
 
 export default function App() {
-	const [ user, setUser ] = useState();
+	const [ user, setUser ] = useState({});
 
 	return (
 		<>
@@ -19,10 +19,12 @@ export default function App() {
 					<Routes>
 						<Route path='/' element={<Login />}/>
 						<Route path='/sign-up' element={<SignUp />}/>
-						<Route path='/wallet' element={<Wallet />} />
+						<Route path='/wallet' element={user.token ? <Wallet {...{user, setUser}} /> : <Navigate to='/' replace/>} />
 					</Routes>
 				</BrowserRouter>
 			</UserContext.Provider>
 		</>
 	);
 }
+
+// user.token ? <Wallet /> : <Navigate to='/' replace/>
